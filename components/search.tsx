@@ -1,7 +1,8 @@
 "use client"
 
 import {IoSearch} from "react-icons/io5"
-import { useSearchParams, usePathname, useRouter } from "next/navigation"
+import { useSearchParams, usePathname, useRouter } from "next/navigation";
+import { useDebouncedCallback } from "use-debounce";
 
 const Search = () => {
 
@@ -9,7 +10,7 @@ const Search = () => {
   const pathName = usePathname();
   const { replace } = useRouter();
 
-  const handleSearch = (term: string) => {
+  const handleSearch = useDebouncedCallback((term: string) => {
     console.log(term);
     const params = new URLSearchParams(searchParams);
     if (term) {
@@ -18,7 +19,7 @@ const Search = () => {
       params.delete("query")
     }
     replace(`${pathName}?${params.toString()}`)
-  }
+  }, 300);
 
   return (
     <div className="relative flex flex-1">
