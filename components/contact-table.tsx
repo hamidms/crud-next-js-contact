@@ -31,7 +31,7 @@ const ContactTable = async ({query, currentPage}:{query: string; currentPage: nu
                 ))}
             </tbody>
         </table>
-  )
+    )
 }
 
 export default ContactTable
